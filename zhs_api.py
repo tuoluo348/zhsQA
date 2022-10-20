@@ -1,7 +1,6 @@
 import requests
 import re
 import datetime
-# windows 下请安装 pycryptodome 库
 from Crypto.Cipher import AES
 import base64
 import time
