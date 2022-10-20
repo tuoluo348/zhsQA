@@ -13,7 +13,7 @@ def get_qid(page_index=0, page_size=50):
     lst=[]
     url='https://creditqa-api.zhihuishu.com/creditqa/gateway/t/v1/web/qa/getRecommendList'
     aes = AESEncrypt(key=QA_AES_KEY, iv=ZHS_AES_IV, mode=ZHS_AES_MODE)
-    for page_index in range(100,300,50):
+    for page_index in range(0,200,50):
         raw_data = f'{{"courseId":"{course_id}","pageIndex":{page_index},' \
                        f'"pageSize":{page_size},"recruitId":"{recruit_id}"}}'
         secret_str = aes.aes_encrypt(raw_data)
@@ -79,16 +79,19 @@ for i in tqdm(range(len(lsts))):
             browser.get("https://passport.zhihuishu.com/login?service=https://onlineservice.zhihuishu.com/login/gologin#signin")
             browser.find_element(By.ID,"lUsername").send_keys(account)
             browser.find_element(By.ID,"lPassword").send_keys(password)
-            browser.find_element(By.XPATH,'//*[@id="f_sign_up"]/div[1]/span').click()
-            time.sleep(2)
-            browser.find_element(By.XPATH,'//*[@id="goValidateLogin-div"]/a').click()
+            time.sleep(1)
+            browser.find_element(By.XPATH,'/html/body/div[4]/div/form/div[1]/span').click()
+
+
+            #browser.find_element(By.XPATH,'//*[@id="goValidateLogin-div"]/a').click()
             time.sleep(5)
-            browser.switch_to.frame('tcaptcha_iframe')
-            time.sleep(0.5)
+            #browser.switch_to.frame('yidun_cover-frame')
+            #time.sleep(0.5)
             try:
                 while True:
-                    target = browser.find_element(By.XPATH,'/html/body/div/div[3]/div[2]/div[1]/div[2]/img')
-                    template = browser.find_element(By.XPATH,'/html/body/div/div[3]/div[2]/div[1]/div[3]/img')
+                    
+                    target = browser.find_element(By.XPATH,'/html/body/div[28]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/img[1]')
+                    template = browser.find_element(By.XPATH,'/html/body/div[28]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/img[2]')
                     # 获取模块的url路径
                     src1 = target.get_attribute("src")
                     src2 = template.get_attribute("src")
@@ -139,7 +142,7 @@ for i in tqdm(range(len(lsts))):
 
 
                     time.sleep(1)
-                    slider = browser.find_elements(By.XPATH,'//*[@id="tcaptcha_drag_thumb"]')[0]
+                    slider = browser.find_elements(By.XPATH,'/html/body/div[28]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/img[2]')[0]
                     ActionChains(browser).click_and_hold(slider).perform()
 
                     for x in track:
@@ -159,9 +162,10 @@ for i in tqdm(range(len(lsts))):
             browser.execute_script('arguments[0].removeAttribute("Class")', d);
         except:
             pass
-        browser.find_element(By.XPATH,'//*[@id="sharingClassed"]/div[2]/ul[1]/div/dl/dt/div[2]/ul/li[3]/a/div').click()
-        time.sleep(5)
-        browser.get('https://creditqa.zhihuishu.com/creditqa/login/getLoginUserInfo')
+        break
+        #browser.find_element(By.XPATH,'//*[@id="sharingClassed"]/div[2]/ul[1]/div/dl/dt/div[2]/ul/li[3]/a/div').click()
+        #time.sleep(5)
+        #browser.get('https://creditqa.zhihuishu.com/creditqa/login/getLoginUserInfo')
 
         cookies = browser.get_cookies()
 
