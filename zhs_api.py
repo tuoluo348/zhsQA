@@ -23,7 +23,7 @@ ZHS_AES_MODE = AES.MODE_CBC
 # 共享学分课视频页AES Key
 STUDY_VIDEO_AES_KEY = 'qz632524n86i7fk9'
 # 共享学分课问答页AES Key
-QA_AES_KEY = '110r2OP7gP602qy9'
+QA_AES_KEY = '753lC9Y37Y9630H6'
 
 
 class AESEncrypt:
