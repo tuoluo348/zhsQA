@@ -1,6 +1,7 @@
 import requests
 import re
 import datetime
+# windows 下请安装 pycryptodome 库
 from Crypto.Cipher import AES
 import base64
 import time
@@ -23,7 +24,7 @@ ZHS_AES_MODE = AES.MODE_CBC
 # 共享学分课视频页AES Key
 STUDY_VIDEO_AES_KEY = 'qz632524n86i7fk9'
 # 共享学分课问答页AES Key
-QA_AES_KEY = '753lC9Y37Y9630H6'
+QA_AES_KEY = 'M3z80S3JUd6LyB7k'
 
 
 class AESEncrypt:
@@ -60,7 +61,8 @@ class AESEncrypt:
         cipher = AES.new(self.key, self.mode, self.iv)
         content = base64.b64decode(content)
         text = cipher.decrypt(content).decode('utf-8')
-        return text.rstrip(self.coding)
+        return text
+
 
 
 class ZHSEncrypt:
@@ -617,3 +619,14 @@ class Course(Account):
         }
         r = session.get(url, params=params)
         return r.text
+'''
+secretStr="NMouVRhlLiOwjCSM4PA1RF7uraeaIF7PZqIkosNgt0H44bZ+/86NoBCPaPvksRoHljXSFbaPLiipBGAECPJfplw+qPaJB7a9EoUE80rbMNSr0TILadHqR73wpAfe8jW6s85QkPhYrKwGiyHM+AzzK1De/TRwgF6Dgr6a/+c0B1I="
+key='M3z80S3JUd6LyB7k'
+iv='1g3qqdh4jvbskb9x'
+mode=AES.MODE_CBC
+aes=AESEncrypt(key,iv,mode)
+
+
+print(aes.aes_decrypt(secretStr))
+
+'''
