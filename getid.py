@@ -15,8 +15,3 @@ def sharecourse_info(status=0, page_no=1, page_size=5):
             courseId=res.json().get('result').get('courseOpenDtos')[i].get('courseId')
             recruitId=res.json().get('result').get('courseOpenDtos')[i].get('recruitId')
             return courseId,recruitId
-
-
-
-
-
